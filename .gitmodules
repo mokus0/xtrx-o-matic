@@ -1,0 +1,18 @@
+[submodule "ext/liblms7002m"]
+	path = ext/liblms7002m
+	url = https://github.com/xtrx-sdr/liblms7002m
+[submodule "ext/libusb3380"]
+	path = ext/libusb3380
+	url = https://github.com/xtrx-sdr/libusb3380
+[submodule "ext/xtrx_linux_pcie_drv"]
+	path = ext/xtrx_linux_pcie_drv
+	url = https://github.com/xtrx-sdr/xtrx_linux_pcie_drv
+[submodule "ext/libxtrxll"]
+	path = ext/libxtrxll
+	url = https://github.com/xtrx-sdr/libxtrxll
+[submodule "ext/libxtrx"]
+	path = ext/libxtrx
+	url = https://github.com/xtrx-sdr/libxtrx
+[submodule "ext/libxtrxdsp"]
+	path = ext/libxtrxdsp
+	url = https://github.com/xtrx-sdr/libxtrxdsp
