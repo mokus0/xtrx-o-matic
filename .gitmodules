@@ -16,3 +16,15 @@
 [submodule "ext/libxtrxdsp"]
 	path = ext/libxtrxdsp
 	url = https://github.com/xtrx-sdr/libxtrxdsp
+[submodule "ext/SoapySDR"]
+	path = ext/SoapySDR
+	url = https://github.com/pothosware/SoapySDR
+[submodule "ext/gr-osmosdr"]
+	path = ext/gr-osmosdr
+	url = https://github.com/osmocom/gr-osmosdr
+[submodule "ext/gr-fosphor"]
+	path = ext/gr-fosphor
+	url = https://github.com/osmocom/gr-fosphor
+[submodule "ext/LimeSuite"]
+	path = ext/LimeSuite
+	url = https://github.com/myriadrf/LimeSuite.git
