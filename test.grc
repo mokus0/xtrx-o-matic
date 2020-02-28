@@ -105,7 +105,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>2.45e9</value>
+      <value>2.42e9</value>
     </param>
   </block>
   <block>
@@ -132,7 +132,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>60e6</value>
+      <value>10e6</value>
     </param>
   </block>
   <block>
@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>file</key>
@@ -206,7 +206,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -257,7 +257,7 @@
     </param>
     <param>
       <key>bw0</key>
-      <value>f0 * 0.8</value>
+      <value>samp_rate * 0.8</value>
     </param>
     <param>
       <key>dc_offset_mode0</key>
@@ -1652,11 +1652,11 @@
     <key>wxgui_waterfallsink2</key>
     <param>
       <key>avg_alpha</key>
-      <value>0</value>
+      <value>0.5</value>
     </param>
     <param>
       <key>average</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>baseband_freq</key>
@@ -1680,15 +1680,15 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>fft_rate</key>
-      <value>15</value>
+      <value>5</value>
     </param>
     <param>
       <key>fft_size</key>
-      <value>512</value>
+      <value>1024</value>
     </param>
     <param>
       <key>freqvar</key>
@@ -1696,7 +1696,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 152)</value>
+      <value>(736, 100)</value>
     </param>
     <param>
       <key>_rotation</key>

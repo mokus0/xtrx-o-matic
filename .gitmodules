@@ -12,7 +12,7 @@
 	url = https://github.com/xtrx-sdr/libxtrxll
 [submodule "ext/libxtrx"]
 	path = ext/libxtrx
-	url = https://github.com/xtrx-sdr/libxtrx
+	url = https://github.com/mokus0/libxtrx
 [submodule "ext/libxtrxdsp"]
 	path = ext/libxtrxdsp
 	url = https://github.com/xtrx-sdr/libxtrxdsp
@@ -28,3 +28,9 @@
 [submodule "ext/LimeSuite"]
 	path = ext/LimeSuite
 	url = https://github.com/myriadrf/LimeSuite.git
+[submodule "ext/rx_tools"]
+	path = ext/rx_tools
+	url = https://github.com/rxseger/rx_tools
+[submodule "ext/rust-soapysdr"]
+	path = ext/rust-soapysdr
+	url = https://github.com/kevinmehall/rust-soapysdr

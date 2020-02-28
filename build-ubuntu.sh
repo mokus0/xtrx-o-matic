@@ -7,6 +7,7 @@ script_dir=$(cd "$(dirname "$0")" && pwd)
 ext_dir=$script_dir/ext
 
 install_prefix=/opt/sdr
+xtrx_pcie_drv_version=0.0.1-2
 
 # YUCK. python can't handle "from gnuradio import blah" unless "blah" 
 # is literally in the first gnuradio directory it finds.  So these files can't
@@ -56,22 +57,31 @@ build_submodule libxtrx
 
 build_submodule LimeSuite
 
+build_submodule rx_tools
+
 sudo tee /etc/ld.so.conf.d/sdr-stuff.conf <<EOF
 $install_prefix/lib
 EOF
 sudo ldconfig
 
-# sudo dkms add xtrx_linux_pcie_drv/xtrx.dkms
+if [[ ! -e /usr/src/xtrx-0.0.1-2 ]]; then
+    sudo ln -sf "$ext_dir"/xtrx_linux_pcie_drv /usr/src/xtrx-"$xtrx_pcie_drv_version"
+    sudo dkms install xtrx/"$xtrx_pcie_drv_version"
+    sudo modprobe xtrx
+fi
 
-# sudo tee /etc/udev/rules.d/50-xtrx.rules <<EOF
-# KERNEL=="xtrx*", SUBSYSTEM=="xtrx", MODE="0666"
-# EOF
-# sudo udevadm control --reload-rules
-# sudo udevadm trigger
+sudo tee /etc/udev/rules.d/50-xtrx.rules <<EOF
+KERNEL=="xtrx*", SUBSYSTEM=="xtrx", MODE="0666"
+EOF
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 
 (
     cd ext/LimeSuite/udev-rules
     sudo sh ./install.sh
-    
-    "$install_prefix/share/Lime/Desktop/install"
 )
+
+if [[ -e "$install_prefix/share/Lime/Desktop/install" ]]; then
+    "$install_prefix/share/Lime/Desktop/install"
+fi
+
