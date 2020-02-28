@@ -59,6 +59,9 @@ build_submodule LimeSuite
 
 build_submodule rx_tools
 
+sudo apt-get install qtbase5-dev libqt5svg5-dev
+build_submodule gqrx
+
 sudo tee /etc/ld.so.conf.d/sdr-stuff.conf <<EOF
 $install_prefix/lib
 EOF
