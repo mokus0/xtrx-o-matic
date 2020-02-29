@@ -47,6 +47,7 @@ build_submodule SoapySDR
 # sudo apt-get install nvidia-opencl-dev opencl-headers libglfw3-dev
 # build_submodule gr-fosphor "-DGR_PYTHON_DIR=$gr_python_dir" -DOPENCL_LIBRARY=/usr/lib/x86_64-linux-gnu/libOpenCL.so
 
+sudo apt-get install libusb-1.0.0-dev
 build_submodule libusb3380
 build_submodule xtrx_linux_pcie_drv
 build_submodule liblms7002m
@@ -56,6 +57,7 @@ build_submodule libxtrx
 
 build_submodule LimeSuite
 
+sudo apt-get install libxml2-dev
 build_submodule libiio
 build_submodule libad9361-iio
 build_submodule SoapyPlutoSDR
@@ -78,13 +80,14 @@ build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
 sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev
 build_submodule gqrx
 
-sudo apt-get install libqt5websockets5-dev libopus-dev
+sudo apt-get install libqt5websockets5-dev libopus-dev qtmultimedia5-dev libopencv-dev
 build_submodule cm256cc
 build_submodule dsdcc
 build_submodule mbelib
 build_submodule serialDV
 build_submodule sdrangel "-DSERIALDV_DIR=$install_prefix"
 
+sudo apt-get install llvm libclang-dev
 (
     cd ext/rust-soapysdr
     cargo build --features binaries --release
