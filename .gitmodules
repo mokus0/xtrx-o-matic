@@ -33,7 +33,7 @@
 	url = https://github.com/rxseger/rx_tools
 [submodule "ext/rust-soapysdr"]
 	path = ext/rust-soapysdr
-	url = https://github.com/kevinmehall/rust-soapysdr
+	url = https://github.com/mokus0/rust-soapysdr
 [submodule "ext/gqrx"]
 	path = ext/gqrx
 	url = https://github.com/csete/gqrx

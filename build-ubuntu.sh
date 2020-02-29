@@ -62,6 +62,14 @@ build_submodule rx_tools
 sudo apt-get install qtbase5-dev libqt5svg5-dev
 build_submodule gqrx
 
+(
+    cd ext/rust-soapysdr
+    cargo build --features binaries --release
+    for binary in soapy-sdr-info soapy-sdr-stream; do
+        sudo install -m 755 -D "target/release/$binary" "$install_prefix/bin/$binary"
+    done
+)
+
 sudo tee /etc/ld.so.conf.d/sdr-stuff.conf <<EOF
 $install_prefix/lib
 EOF

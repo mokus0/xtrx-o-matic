@@ -27,6 +27,9 @@ My target XTRX hardware:
 What currently works?
 
 - builds and runs test.grc flowgraph on my ubuntu desktop, after 3 hours of infuriating NVIDIA driver hell.
+- gqrx works with soapy drivers (doesn't seem to work with soapy=0 in device string, haven't investigated)
+- rx_sdr stuff works
+- rust-soapysdr works, with soapy-sdr-{info,stream} as a couple example/test binaries
 
 Notable things that don't currently work:
 
