@@ -44,9 +44,6 @@ build_submodule() {
 sudo apt-get install build-essential cmake libpython-dev python-numpy swig gnuradio gr-fosphor
 build_submodule SoapySDR
 
-sudo apt-get install gnuradio-dev
-build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
-
 # sudo apt-get install nvidia-opencl-dev opencl-headers libglfw3-dev
 # build_submodule gr-fosphor "-DGR_PYTHON_DIR=$gr_python_dir" -DOPENCL_LIBRARY=/usr/lib/x86_64-linux-gnu/libOpenCL.so
 
@@ -59,7 +56,24 @@ build_submodule libxtrx
 
 build_submodule LimeSuite
 
+build_submodule libiio
+build_submodule libad9361-iio
+build_submodule SoapyPlutoSDR
+
+# CMAKE fails spuriously once
+# see https://gitlab.kitware.com/cmake/cmake/issues/15829
+build_submodule librtlsdr || build_submodule librtlsdr
+sudo install -m 644 "$ext_dir"/librtlsdr/rtl-sdr.rules /etc/udev/rules.d/99-rtl-sdr.rules
+sudo tee /lib/modprobe.d/blacklist-rtl28xxu.conf <<EOF
+blacklist dvb_usb_rtl28xxu
+EOF
+
+build_submodule SoapyRTLSDR
+
 build_submodule rx_tools
+
+sudo apt-get install gnuradio-dev
+build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
 
 sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev
 build_submodule gqrx

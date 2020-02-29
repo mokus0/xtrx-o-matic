@@ -37,3 +37,18 @@
 [submodule "ext/gqrx"]
 	path = ext/gqrx
 	url = https://github.com/csete/gqrx
+[submodule "ext/libiio"]
+	path = ext/libiio
+	url = https://github.com/analogdevicesinc/libiio
+[submodule "ext/libad9361-iio"]
+	path = ext/libad9361-iio
+	url = https://github.com/analogdevicesinc/libad9361-iio
+[submodule "ext/SoapyPlutoSDR"]
+	path = ext/SoapyPlutoSDR
+	url = https://github.com/pothosware/SoapyPlutoSDR
+[submodule "ext/SoapyRTLSDR"]
+	path = ext/SoapyRTLSDR
+	url = https://github.com/pothosware/SoapyRTLSDR
+[submodule "librtlsdr"]
+	path = ext/librtlsdr
+	url = https://github.com/steve-m/librtlsdr
