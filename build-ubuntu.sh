@@ -14,6 +14,8 @@ xtrx_pcie_drv_version=0.0.1-2
 # go into /opt with everything else.
 gr_python_dir=/usr/lib/python2.7/dist-packages
 
+sudo apt-get install gpsd gpsd-clients pps-tools
+
 git submodule update --init --recursive
 
 CMAKE_GLOBAL_OPTS=(
