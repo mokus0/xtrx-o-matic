@@ -34,3 +34,4 @@ What currently works?
 Notable things that don't currently work:
 
 - xtrx soapy driver enumeration: current implementation COMPLETELY IGNORES the provided "match args".  You get the first device in the list.  Don't care if you want it or not.  Also, it doesn't know the difference between an XTRX and a LimeSDR - XTRX driver will try to enumerate a LimeSDR but will fail with incompatible gateware.
+- soapy-sdr-stream demo app (from rust-soapysdr) file i/o is much too slow for use on xavier at sample rates over ~10 MHz.  This is more just a thing to be aware of, we don't actually need this to be fast but we also don't want to incorrectly assume the streaming itself is broken because this demo drops frames.

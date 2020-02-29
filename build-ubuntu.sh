@@ -59,7 +59,7 @@ build_submodule LimeSuite
 
 build_submodule rx_tools
 
-sudo apt-get install qtbase5-dev libqt5svg5-dev
+sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev
 build_submodule gqrx
 
 (
