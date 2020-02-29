@@ -52,3 +52,18 @@
 [submodule "librtlsdr"]
 	path = ext/librtlsdr
 	url = https://github.com/steve-m/librtlsdr
+[submodule "ext/sdrangel"]
+	path = ext/sdrangel
+	url = https://github.com/f4exb/sdrangel
+[submodule "ext/serialDV"]
+	path = ext/serialDV
+	url = https://github.com/f4exb/serialDV
+[submodule "ext/cm256cc"]
+	path = ext/cm256cc
+	url = https://github.com/f4exb/cm256cc
+[submodule "ext/dsdcc"]
+	path = ext/dsdcc
+	url = https://github.com/f4exb/dsdcc
+[submodule "ext/mbelib"]
+	path = ext/mbelib
+	url = https://github.com/szechyjs/mbelib

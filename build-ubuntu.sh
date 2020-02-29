@@ -78,6 +78,13 @@ build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
 sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev
 build_submodule gqrx
 
+sudo apt-get install libqt5websockets5-dev libopus-dev
+build_submodule cm256cc
+build_submodule dsdcc
+build_submodule mbelib
+build_submodule serialDV
+build_submodule sdrangel "-DSERIALDV_DIR=$install_prefix"
+
 (
     cd ext/rust-soapysdr
     cargo build --features binaries --release
