@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -euo pipefail
-shellcheck "$0"
+shellcheck -x "$0"
 
 script_dir=$(cd "$(dirname "$0")" && pwd)
 ext_dir=$script_dir/ext
@@ -14,7 +14,7 @@ xtrx_pcie_drv_version=0.0.1-2
 # go into /opt with everything else.
 gr_python_dir=/usr/lib/python2.7/dist-packages
 
-sudo apt-get install gpsd gpsd-clients pps-tools
+sudo apt-get install gpsd gpsd-clients pps-tools dkms
 
 git submodule update --init --recursive
 
@@ -41,7 +41,10 @@ build_submodule() {
     )
 }
 
-sudo apt-get install build-essential cmake libpython-dev python-numpy swig gnuradio gr-fosphor
+sudo apt-get install build-essential libpython-dev python-numpy swig gnuradio gr-fosphor
+sudo apt-get remove --purge cmake
+sudo snap install cmake --classic
+
 build_submodule SoapySDR
 
 # sudo apt-get install nvidia-opencl-dev opencl-headers libglfw3-dev
@@ -87,7 +90,8 @@ build_submodule mbelib
 build_submodule serialDV
 build_submodule sdrangel "-DSERIALDV_DIR=$install_prefix"
 
-sudo apt-get install llvm libclang-dev
+source env.sh
+sudo apt-get install llvm libclang-dev clang
 (
     cd ext/rust-soapysdr
     cargo build --features binaries --release
