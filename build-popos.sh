@@ -12,45 +12,26 @@ xtrx_pcie_drv_version=0.0.1-2
 # YUCK. python can't handle "from gnuradio import blah" unless "blah" 
 # is literally in the first gnuradio directory it finds.  So these files can't
 # go into /opt with everything else.
+# 
+# Also, big sad: gnuradio still needs python 2.7 (or at least the version in apt does)
 gr_python_dir=/usr/lib/python2.7/dist-packages
 
 sudo apt-get install gpsd gpsd-clients pps-tools dkms
 
-git submodule update --init --recursive
+# git submodule update --init --recursive
 
-CMAKE_GLOBAL_OPTS=(
-    "-DCMAKE_INSTALL_PREFIX=$install_prefix"
-    "-DCMAKE_INCLUDE_PATH=$install_prefix/include"
-    "-DCMAKE_LIBRARY_PATH=$install_prefix/lib"
-)
+source functions.sh
 
-MAKE_GLOBAL_OPTS=(
-    -j8
-)
-
-build_submodule() {
-    submodule=$1
-    shift
-    
-    mkdir -p build/"$submodule"
-    (
-        cd build/"$submodule"
-        cmake "${CMAKE_GLOBAL_OPTS[@]}" "$ext_dir"/"$submodule" "$@"
-        make "${MAKE_GLOBAL_OPTS[@]}"
-        sudo make install
-    )
-}
-
-sudo apt-get install build-essential libpython-dev python-numpy swig gnuradio gr-fosphor
-sudo apt-get remove --purge cmake
-sudo snap install cmake --classic
+sudo apt-get install build-essential libpython2-dev python-numpy swig gnuradio gr-fosphor
+# sudo apt-get remove --purge cmake
+# sudo snap install cmake --classic
 
 build_submodule SoapySDR
 
 # sudo apt-get install nvidia-opencl-dev opencl-headers libglfw3-dev
 # build_submodule gr-fosphor "-DGR_PYTHON_DIR=$gr_python_dir" -DOPENCL_LIBRARY=/usr/lib/x86_64-linux-gnu/libOpenCL.so
 
-sudo apt-get install libusb-1.0.0-dev
+sudo apt-get install libusb-1.0.0-dev python3-cheetah
 build_submodule libusb3380
 build_submodule xtrx_linux_pcie_drv
 build_submodule liblms7002m
@@ -60,7 +41,7 @@ build_submodule libxtrx
 
 build_submodule LimeSuite
 
-sudo apt-get install libxml2-dev
+sudo apt-get install libxml2-dev flex bison
 build_submodule libiio
 build_submodule libad9361-iio
 build_submodule SoapyPlutoSDR
@@ -77,18 +58,21 @@ build_submodule SoapyRTLSDR
 
 build_submodule rx_tools
 
-sudo apt-get install gnuradio-dev
-build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
+# TODO: fix. fails to build because of some CMAKE error.
+skip sudo apt-get install gnuradio-dev
+skip build_submodule gr-osmosdr "-DGR_PYTHON_DIR=$gr_python_dir"
 
-sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev
-build_submodule gqrx
+# TODO: requires gr-osmosdr
+skip sudo apt-get install qtbase5-dev libqt5svg5-dev libpulse-dev libasound-dev
+skip build_submodule gqrx
 
-sudo apt-get install libqt5websockets5-dev libopus-dev qtmultimedia5-dev libopencv-dev
-build_submodule cm256cc
-build_submodule dsdcc
-build_submodule mbelib
-build_submodule serialDV
-build_submodule sdrangel "-DSERIALDV_DIR=$install_prefix"
+# TODO: more boost cmake pain
+skip sudo apt-get install libqt5websockets5-dev libopus-dev qtmultimedia5-dev libopencv-dev libboost-dev
+skip build_submodule cm256cc
+skip build_submodule dsdcc
+skip build_submodule mbelib
+skip build_submodule serialDV
+skip build_submodule sdrangel "-DSERIALDV_DIR=$install_prefix"
 
 source env.sh
 sudo apt-get install llvm libclang-dev clang
