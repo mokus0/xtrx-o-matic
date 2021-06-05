@@ -1,0 +1,13 @@
+build_target uhd
+git_repository https://github.com/EttusResearch/uhd.git v4.0.0.0
+
+apt_build_dependencies build-essential ccache curl sudo
+apt_build_dependencies abi-dumper doxygen libboost-all-dev libgps-dev libudev-dev libusb-1.0-0-dev ncompress ninja-build
+apt_build_dependencies python3-{dev,docutils,mako,numpy,pip,requests} 
+
+# TODO: dpdk support (need exact version 18.11)
+cmake_build_subdir host
+
+build_target SoapyUHD
+git_repository https://github.com/pothosware/SoapyUHD soapy-uhd-0.4.1
+cmake_build

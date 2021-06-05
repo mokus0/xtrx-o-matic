@@ -1,0 +1,18 @@
+apt_build_dependencies build-essential libboost-all-dev libgmp-dev swig doxygen libfftw3-dev libsdl1.2-dev libgsl-dev libqwt-qt5-dev libqt5opengl5-dev liblog4cpp5-dev libzmq3-dev pybind11-dev libjs-mathjax libunwind-dev libthrift-dev libgtk-3-dev libcairo2-dev libpangocairo-1.0-0 libsndfile1-dev libjack-dev portaudio19-dev libqt5svg5-dev libcodec2-dev libgsm1-dev
+apt_build_dependencies python3-{pyqtgraph,numpy,mako,sphinx,lxml,yaml,click,click-plugins,zmq,scipy,pip,gi-cairo,pyqt5,pygccxml,gi}
+
+build_target volk
+apt_build_dependencies liborc-0.4-dev
+git_repository https://github.com/gnuradio/volk.git v2.4.1
+git_fetch_submodules --recursive
+cmake_build -DPYTHON_EXECUTABLE=/usr/bin/python3
+
+build_target gnuradio
+git_repository https://github.com/gnuradio/gnuradio v3.9.1.0
+git_fetch_submodules --recursive
+cmake_build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DGR_PYTHON_DIR="$gr_python_dir"
+
+post_install() {
+    banner "Running volk_profile.  This takes a while..."
+    volk_profile
+}

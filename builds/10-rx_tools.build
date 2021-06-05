@@ -1,0 +1,3 @@
+build_target rx_tools
+git_repository https://github.com/rxseger/rx_tools 811b21c4c8a592515279bd19f7460c6e4ff0551c
+cmake_build

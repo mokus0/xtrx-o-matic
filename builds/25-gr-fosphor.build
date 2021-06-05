@@ -1,0 +1,4 @@
+build_target gr-fosphor
+git_repository https://github.com/osmocom/gr-fosphor 974ab2fe54c25e8b6c37aa4de148ba0625eef652
+apt_build_dependencies ocl-icd-opencl-dev libglfw3-dev
+cmake_build -DGR_PYTHON_DIR="$gr_python_dir"

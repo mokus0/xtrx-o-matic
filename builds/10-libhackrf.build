@@ -1,0 +1,4 @@
+build_target hackrf
+git_repository https://github.com/mossmann/hackrf v2021.03.1
+apt_build_dependencies build-essential cmake libusb-1.0-0-dev pkg-config libfftw3-dev
+cmake_build_subdir host

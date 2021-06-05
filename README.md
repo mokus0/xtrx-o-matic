@@ -1,37 +1,52 @@
 XTRX-o-matic
-======
+=============
 
-Because the XTRX project maintainers don't exist, apparently, and I'm SO DAMN TIRED of searching the internet for patches that have been out there for months or years, and fixing newly-introduced bugs.
+This project started life as a script for building libxtrx and soapysdr 0.8.0 from source, since the apt repos on my systems have an older soapysdr and no libxtrx.  It has evolved beyond that, now, to a generic setup script for a bunch of radio software I use in my home lab.  This is designed to set things up in a simple, opinionated way and if you don't like it, you're welcome to not use it.  It's also very untested outside my own specific environment - you should probably just start from the assumption it won't work in yours, and be pleasantly surprised if it does.
 
-I'm collecting here some patched versions of ALL THE THINGS so that I can actually use my XTRX radios.  I'm also including some build scripts that WORK FOR ME AND PROBABLY ME ONLY.  They bake in a lot of assumptions about where I want my shit to be put, and you might not want the same.  This whole thing was written in a state of annoyance, and I don't much care right now if it's useful for anyone else.  Someday I might, but not today.
+My target operating systems (right now, only ubuntu/pop 20.04 build is implemented; macos probably coming eventually):
 
-My target environments:
+* Ubuntu/Pop!\_OS 20.04 amd64
+* Ubuntu [18.04??] arm64
+* macOS amd64
+* macoS arm64
 
-- Ubuntu 18.04 amd64
-- Ubuntu [18.04??] arm64
-- macOS
+My primary target hardware:
+* Desktop/laptop computer running linux or macos
+* NVIDIA Jetson TX2 / AGX Xavier dev kit
+* Various RTL-SDR dongles
+* LimeSDR
+* XTRX
+* USRP X310
 
-My target software integrations:
+My primary target software (this installs some other stuff on a best-effort basis but it's really not tested much if at all, even in my own environment):
+* SoapySDR 0.8
+* XTRX soapy driver
+* UHD 4
+* GNU Radio 3.9
+* GQRX
+* SDRAngel
 
-- ANYTHING with a real-time waterfall display for HW validation.  gqrx? sdrangel? sdrangelove? gnu radio companion with fosphor (although this one is its own giant can of shitty worms to get running)?
-- whatever tools i need to flash new code/bitstream/etc to the XTRX
-- rust language (probably via SoapySDR) so I can finally quit shaving yaks and actually use these radios for my real projects
+Usage
+---
 
-My target XTRX hardware:
+* Poke around for the scripts you want, then run them.  The ones most likely to work as of this commit are the ones for Ubuntu 20.04.  For example, to build and install natively on an Ubuntu 20.04 system (i.e., not in a container but on the actual host doing the building), run:
+    * native/ubuntu-20.04/install-deps.sh && native/ubuntu-20.04/build.sh
+* If something doesn't work, let me know... I might not have time to do anything about it but if you create a github "issue" at least other people will know too.  If something does work, it'd be nice to let me know about that too - I don't test this very extensively since it was only ever meant to work for me, but if it also works for others that'd be nifty.
+* After installation, to run stuff you'll need to set certain paths in your environment.  "source env.sh" should get you there, or close at least.
 
-- XTRX community edition
-- XTRX USB3 adapter
-- XTRX PCIe x2 FE adapter
-- XTRX octopack
+Organization
+---
 
-What currently works?
+These scripts are build around a bunch of individual files for each group of software it builds.  In the main 'builds' subdirectory there are a bunch of files named `*.build`.  These are just bash scripts, but they are meant to be interpreted somewhat declaratively.  They are sourced multiple times in different contexts with different implementations of the functions they call, depending on the purpose of the current invocation.  The implementations are ad-hoc, repetitive, and messy.  Enter at your own risk.
 
-- builds and runs test.grc flowgraph on my ubuntu desktop, after 3 hours of infuriating NVIDIA driver hell.
-- gqrx works with soapy drivers (doesn't seem to work with soapy=0 in device string, haven't investigated)
-- rx_sdr stuff works
-- rust-soapysdr works, with soapy-sdr-{info,stream} as a couple example/test binaries
+Quirks
+---
 
-Notable things that don't currently work:
+* On Pop!\_OS 20.04, not sure why but some stuff acts differently from the ubuntu docker image I did inital testing in.  In particular, cmake whines about boost-chrono-dev declaring /include as an include dir while that path doesn't exist.  I haven't dug into why, because I don't care that much right now.  My quick ugly hack was to create a symlink /include -> /usr/include. YMMV.
+* On NVIDIA Tegra systems, some L4T targets (mainly older ones, I think) will have a default boot configuration that doesn't provide as many DMA resources as the XTRX driver will want.  It is recommended to add the following kernel command-line arguments:
 
-- xtrx soapy driver enumeration: current implementation COMPLETELY IGNORES the provided "match args".  You get the first device in the list.  Don't care if you want it or not.  Also, it doesn't know the difference between an XTRX and a LimeSDR - XTRX driver will try to enumerate a LimeSDR but will fail with incompatible gateware.
-- soapy-sdr-stream demo app (from rust-soapysdr) file i/o is much too slow for use on xavier at sample rates over ~10 MHz.  This is more just a thing to be aware of, we don't actually need this to be fast but we also don't want to incorrectly assume the streaming itself is broken because this demo drops frames.
+    vmalloc=512M cma=64M coherent_pool=32M pci=noaer
+
+This is done in a different way depending on the L4T version.  In older ones, you can edit the APPEND line in /boot/extlinux/extlinux.conf.  In newer ones you have to modify and re-flash the cboot kernel config to add the kernel arguments.  The one that ships with the Jetson AGX Xavier doesn't appear to need this.
+
+TODO: more documentation, less clutter, etc.

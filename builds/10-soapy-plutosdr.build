@@ -1,0 +1,13 @@
+apt_build_dependencies libusb-1.0-0-dev libxml2-dev bison flex libserialport-dev libavahi-client-dev
+
+build_target libiio
+git_repository https://github.com/analogdevicesinc/libiio v0.21
+cmake_build
+
+build_target libad9361-iio
+git_repository https://github.com/analogdevicesinc/libad9361-iio v0.2
+cmake_build
+
+build_target SoapyPlutoSDR
+git_repository https://github.com/pothosware/SoapyPlutoSDR soapy-plutosdr-0.2.1
+cmake_build

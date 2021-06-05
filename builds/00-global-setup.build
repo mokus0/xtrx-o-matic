@@ -1,0 +1,4 @@
+build_target global_setup
+
+apt_build_dependencies locales sudo
+apt_dependencies man

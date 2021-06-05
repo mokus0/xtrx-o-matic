@@ -1,0 +1,17 @@
+build_target limesuite
+git_repository https://github.com/myriadrf/LimeSuite.git v20.10.0
+
+apt_build_dependencies libwxgtk3.0-gtk3-dev wx-common libusb-1.0-0-dev gnuplot libopengl-dev libx11-dev libfltk1.3-dev liboctave-dev
+
+cmake_build -DENABLE_SIMD_FLAGS=avx2 -DENABLE_GUI=ON
+
+if os linux; then
+    post_install() {
+        cd "$(source_dir limesuite)"/udev-rules
+        sudo sh ./install.sh
+
+        if [[ -e "$install_prefix/share/Lime/Desktop/install" ]]; then
+            "$install_prefix/share/Lime/Desktop/install"
+        fi
+    }
+fi

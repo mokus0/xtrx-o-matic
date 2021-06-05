@@ -1,0 +1,5 @@
+build_target bladerf
+git_repository https://github.com/Nuand/bladeRF 1da130cb5ac9e9f722737e9aee141ecccebef00d
+git_fetch_submodules --recursive
+apt_build_dependencies build-essential libtecla-dev libusb-1.0.0-dev pkg-config libedit-dev
+cmake_build_subdir host

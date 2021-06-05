@@ -1,0 +1,5 @@
+TODO check issue https://github.com/dl1ksv/gr-fcdproplus/issues/23
+
+# build_target gr-fcdproplus
+# git_repository https://github.com/dl1ksv/gr-fcdproplus 575fcafbb8f36dc11d95a305f331660612a44596
+# cmake_build -DGR_PYTHON_DIR="$gr_python_dir"

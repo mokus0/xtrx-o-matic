@@ -1,0 +1,6 @@
+build_target soapysdr
+git_repository https://github.com/pothosware/SoapySDR soapy-sdr-0.8.0
+
+apt_build_dependencies build-essential doxygen swig python3-dev
+
+cmake_build -DENABLE_PYTHON3=ON

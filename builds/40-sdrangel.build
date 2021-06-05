@@ -1,0 +1,22 @@
+build_target cm256cc
+git_repository https://github.com/f4exb/cm256cc v1.1.0
+cmake_build
+
+build_target dsdcc
+git_repository https://github.com/f4exb/dsdcc v1.9.3
+cmake_build
+
+build_target mbelib
+git_repository https://github.com/szechyjs/mbelib 9a04ed5c78176a9965f3d43f7aa1b1f5330e771f
+cmake_build
+
+build_target serialDV
+git_repository https://github.com/f4exb/serialDV v1.1.4
+cmake_build
+
+build_target sdrangel
+apt_build_dependencies libopus-dev libopencv-dev libboost-dev libfaad-dev libavdevice-dev libavfilter-dev libpostproc-dev
+apt_build_dependencies libqt5websockets5-dev qtmultimedia5-dev libqt5serialport5-dev qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5charts5-dev libqt5texttospeech5-dev
+git_repository https://github.com/f4exb/sdrangel v6.13.0
+TODO "investigate other optional dependencies: libsigmf sgp4 apt libdab"
+cmake_build "-DSERIALDV_DIR=$install_prefix" -DGR_PYTHON_DIR="$gr_python_dir"

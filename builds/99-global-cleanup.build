@@ -1,0 +1,13 @@
+build_target global_cleanup
+
+post_install() {
+    if os linux; then
+    echo "$install_prefix/lib" | sudo tee /etc/ld.so.conf.d/sdr-stuff.conf
+    sudo ldconfig
+    fi
+
+    if os linux && native; then
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger
+    fi
+}

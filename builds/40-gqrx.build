@@ -1,0 +1,4 @@
+build_target gqrx
+git_repository https://github.com/csete/gqrx v2.14.4
+writes_to_src
+cmake_build -DGR_PYTHON_DIR="$gr_python_dir"

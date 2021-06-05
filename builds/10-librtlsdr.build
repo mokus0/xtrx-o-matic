@@ -1,0 +1,15 @@
+build_target librtlsdr
+git_repository https://github.com/steve-m/librtlsdr ed0317e6a58c098874ac58b769cf2e609c18d9a5
+apt_build_dependencies libusb-1.0.0-dev libglib2.0-dev
+cmake_build
+
+build_target SoapyRTLSDR
+git_repository https://github.com/pothosware/SoapyRTLSDR 53ee8f4a19dd97011a569cfc2e6f7ad63f896100
+cmake_build
+
+if os linux; then
+    post_install() {
+        sudo install -m 644 "$(source_dir librtlsdr)"/rtl-sdr.rules /etc/udev/rules.d/99-rtl-sdr.rules
+        echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /lib/modprobe.d/blacklist-rtl28xxu.conf
+    }
+fi

@@ -1,0 +1,4 @@
+build_target libairspyhf
+git_repository https://github.com/airspy/airspyhf 1.6.8
+apt_build_dependencies build-essential libusb-1.0.0-dev pkg-config
+cmake_build

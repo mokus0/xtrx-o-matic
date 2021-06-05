@@ -1,0 +1,38 @@
+apt_build_dependencies libusb-1.0-0-dev python3-cheetah qtbase5-dev libqcustomplot-dev
+xtrx_pcie_drv_version=0.0.1-2
+
+build_target libusb3380
+git_repository https://github.com/xtrx-sdr/libusb3380 c83d1e93eb3a5b8b6a9db41c2613b206f344f825
+cmake_build
+
+build_target xtrx_linux_pcie_drv
+git_repository https://github.com/xtrx-sdr/xtrx_linux_pcie_drv 5ae3a3e877e5b04da6e1cfdcca2d2f124857ddb0
+cmake_build
+
+build_target liblms7002m
+git_repository https://github.com/xtrx-sdr/liblms7002m b07761b7386181f0e6a35158456b75bce14f2aca
+cmake_build
+
+build_target libxtrxll
+git_repository https://github.com/xtrx-sdr/libxtrxll 1b6eddfbedc700efb6f7e3c3594e43ac6ff29ea4
+cmake_build
+
+build_target libxtrxdsp
+git_repository https://github.com/xtrx-sdr/libxtrxdsp eec28640c0ebd5639b642f07b310a0a0d02d9834
+cmake_build
+
+build_target libxtrx
+git_repository https://github.com/xtrx-sdr/libxtrx acb0b1cf7ab92744034767a04c1d4b4c281b840f
+cmake_build
+
+if os ubuntu 20.04 && native; then
+    post_install() {
+        if [[ ! -e /usr/src/xtrx-"$xtrx_pcie_drv_version" ]]; then
+            sudo ln -sf "$(source_dir xtrx_linux_pcie_drv)" /usr/src/xtrx-"$xtrx_pcie_drv_version"
+            sudo dkms install xtrx/"$xtrx_pcie_drv_version"
+            sudo modprobe xtrx || banner "WARNING: Compiled XTRX module but was unable to load it"
+        fi
+
+        echo 'KERNEL=="xtrx*", SUBSYSTEM=="xtrx", MODE="0666"' | sudo tee /etc/udev/rules.d/50-xtrx.rules
+    }
+fi

@@ -1,0 +1,4 @@
+# This is a placeholder for now.
+# I use this directory to test build configurations for new packages in docker
+# with the build for these separated into a separate image layer from the main 'build'
+# directory so it doesn't have to rebuild everything else as often.

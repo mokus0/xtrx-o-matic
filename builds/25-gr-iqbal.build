@@ -1,0 +1,6 @@
+TODO check for new release with GR 3.9 compatibily
+
+build_target gr-iqbal
+git_repository https://github.com/osmocom/gr-iqbal fbee239a6fb36dd2fb564f6e6a0d393c4bc844db
+git_fetch_submodules --recursive
+cmake_build -DGR_PYTHON_DIR="$gr_python_dir"
