@@ -3,7 +3,7 @@
 
 # Global build configurations, available in scope everywhere
 install_prefix=/opt/sdr
-gr_python_dir=/opt/sdr/python3.8/dist-packages
+gr_python_dir=/opt/sdr/lib/python3.8/dist-packages
 
 CMAKE_GLOBAL_OPTS=(
     "-DCMAKE_BUILD_TYPE=Release"

@@ -6,7 +6,7 @@ apt_build_dependencies abi-dumper doxygen libboost-all-dev libgps-dev libudev-de
 apt_build_dependencies python3-{dev,docutils,mako,numpy,pip,requests} 
 
 # TODO: dpdk support (need exact version 18.11)
-cmake_build_subdir host
+cmake_build_subdir host -DENABLE_PYTHON_API=ON
 
 build_target SoapyUHD
 git_repository https://github.com/pothosware/SoapyUHD soapy-uhd-0.4.1

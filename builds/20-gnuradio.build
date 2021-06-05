@@ -13,6 +13,8 @@ git_fetch_submodules --recursive
 cmake_build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DGR_PYTHON_DIR="$gr_python_dir"
 
 post_install() {
-    banner "Running volk_profile.  This takes a while..."
-    volk_profile
+    if [[ ! -f "$HOME"/.volk/volk_config ]]; then
+        banner "Running volk_profile.  This takes a while..."
+        volk_profile
+    fi
 }
